@@ -1,2 +1,3 @@
 We propose an approach to automating the process of inventory of representatives of discomycetes and presents the results of using prototypes of programs of this technological cycle, confirming the possibility of detecting the presence of fruit bodies of discomycetes in photographs taken in the natural habitat.
 The proposed solution included the application of the k-means clustering method, the use of normalized scaled histograms of image fragments obtained after clustering to determine the presence of an image of the fruit body of representatives of the Discomycete order group on it.
+You can test the code with your own discomycetes' images or use the same picture as we did (fungi3.jpg found in the /Preprocessing)
