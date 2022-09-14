@@ -21,8 +21,7 @@ import plotly.express as px
 
 import seaborn as sns
 
-#fungiO= cv2.imread('fungi2106.jpg')## Для fungi2106##_________!!!!!_______
-fungiO= cv2.imread('fungi3.jpg')##     Для fungi3   ##_________!!!!!_______ Loads an image from a file
+fungiO= cv2.imread('fungi3.jpg')##     Loads an image from a file
 fungi=cv2.GaussianBlur(fungiO,(11,11), 0, 0, cv2.BORDER_DEFAULT) ## рассеяние по Гауссу, нули - стандартное отклонение. Делаем, чтоб границы стали менее дискретными
 fig=px.imshow(cv2.cvtColor(fungi,cv2.COLOR_RGB2BGR)) ## конвертация цвета (конвертколор), 
 fig.show()
@@ -32,9 +31,7 @@ fig.show()
 from time import time
 from sklearn.utils import shuffle
 
-fungi
-
-my_init = np.array([[30.,40.,50],[60.,70.,20.],[98.,188.,153]]) #массив, но почему такой - не вдупляю. Это затравка для кластеризации, не используется.
+my_init = np.array([[30.,40.,50],[60.,70.,20.],[98.,188.,153]]) #затравка для кластеризации, не используется.
 
 fun_flt = np.array(cv2.cvtColor(fungi,cv2.COLOR_RGB2HLS), dtype=np.float64) / 255 #тип элементов массива добавился, поэтому фунги_флоат 
 w, h, d = original_shape = tuple(fungi.shape) # создаем кортеж, а вот что такое d? density. Это rgb или hls компоненты w x h точек по три праметра в каждой
@@ -60,7 +57,6 @@ print(im_list.count(0),im_list.count(1),im_list.count(2),im_list.count(3))
 fig=px.imshow(result)
 fig.show()
 
-#new_mask=result==2 ## Для fungi2106##_________!!!!!_______
 new_mask=result==0 ### Для fungi3   ##_________!!!!!_______
 new_image=result.copy()
 new_image=new_image.astype(np.uint8) # Converted the datatype to np.uint8 (int	0 to 255)
@@ -116,8 +112,6 @@ R_dfs.insert(5,'Y',R_dfs.y + R_dfs.h)
 #Перенумеровываем строки - прямоугольники
 #R_dfsr=R_dfsh.reset_index()
 
-R_dfs.head()
-
 Corn_df = R_dfs.get(['x','y','X','Y'])
 #Corn_df.head()
 records = Corn_df.to_records()
@@ -150,20 +144,6 @@ fig = px.imshow(cv2.cvtColor(NewImage_,cv2.COLOR_RGB2BGR))
 fig.show()
 
 from numpy.ma.core import reshape
-"""NewImage_.shape
-St_l=len(NewImage_)
-Rw_l=len(NewImage_[0])
-B_=NewImage_.reshape([Rw_l*St_l,3])
-H_df = pd.DataFrame(B_,columns=["I", "II", "III"])
-B_L=NewImage_L.reshape([Rw_l*St_l,3])
-H_Ldf = pd.DataFrame(B_L,columns=["I", "II-HLS", "III-HLS"])
-#H_df.describe()
-B_S=NewImage_S.reshape([Rw_l*St_l,3])
-H_Sdf = pd.DataFrame(B_S,columns=["I-HSV", "II-HSV", "III-HSV"])
-hist_ = H_df.hist(bins=18,figsize=(15,4),sharey=True,rwidth=0.9,layout=(1,3),color='#607c8e')
-hist_L = H_Ldf.hist(bins=18,figsize=(15,4),sharey=True,rwidth=0.9,layout=(1,3),color='#607c8e')
-#hist_S = H_Sdf.hist(bins=18,figsize=(15,4),sharey=True,rwidth=0.9,layout=(1,3),color='#607c8e')
-H_Ldf.describe()"""
 
 NewRows_df=pd.DataFrame(columns=['cOunt','mEan','sTd','Q25','Q50','Q75','WH'])
 #NewRows_df.head()
@@ -224,33 +204,6 @@ for C_Num in range(len(Corn_df)):
         Vector.append(C_Num)
         Result.append(list(E))
 
-arrayTest=[101,105,107,105,216,68,79,205,38,68,206]
-dftest=pd.DataFrame(arrayTest,columns=["A"])
-dftest
-
-serietest = dftest.A.value_counts(ascending=True,sort=False)
-serietest
-
-serie_
-
-serietest.values
-
-serie_.values
-
-serie_.index
-
-serietest.index
-
-E=_Normalize(serietest.values,serietest.index,16)
-E
-
-
-
-arrayTest2=[1,5,7]
-
-arrayTest.count(arrayTest2)
-
-range
 
 #############__2__###################
 # Расчет гистограмм для выделенных  #
@@ -287,9 +240,7 @@ for C_Num in range(len(Corn_df)):
 print ('Stop')
 
 # Это номера фрагментов с грибами и без них
-#FunX=[2,44,56,61]## Для fungi2106##_________!!!!!_______
-#FunX=[1,2,3,4,5,6,7,8,10,12]## Для fungi3
-FunX=[0,6,3] ## это для нового фунги
+FunX=[1,2,3,4,5,6,7,8,10,12]
 R=list(set(Vector)-set(FunX))
 
 #Гистограмма без очистки
